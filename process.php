@@ -40,9 +40,9 @@
             $mobileList = $data->children->mobile; 
             writeDoc($mobileList, $dir, $appId, $authToken);    
         
-            writeFile($dir, "config.json", getFileContent($appId, $authToken, $data->children->config.json));
-            writeFile($dir, "schema.xml", getFileContent($appId, $authToken, $data->children->schema.xml));
-            writeFile($dir, "sync_rules.xml", getFileContent($appId, $authToken, $data->children->sync_rules.xml));
+            writeFile($dir, "config.json", getFileContent($appId, $authToken, "config.json"));
+            writeFile($dir, "schema.xml", getFileContent($appId, $authToken, "schema.xml"));
+            writeFile($dir, "sync_rules.xml", getFileContent($appId, $authToken, "sync_rules.xml"));
           }
     }
 
