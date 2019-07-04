@@ -35,10 +35,10 @@
         } else {
             $data = json_decode($response);
             $cloudCodeList = $data->children->cloudcode;     
-            writeDoc($cloudCodeList, $dir); 
+            writeDoc($cloudCodeList, $dir, $appId, $authToken); 
 
             $mobileList = $data->children->mobile; 
-            writeDoc($mobileList, $dir);    
+            writeDoc($mobileList, $dir, $appId, $authToken);    
         
             writeFile($dir, "config.json", getFileContent($appId, $authToken, $data->children->config.json));
             writeFile($dir, "schema.xml", getFileContent($appId, $authToken, $data->children->schema.xml));
@@ -46,7 +46,7 @@
           }
     }
 
-    function writeDoc($fileList, $dir) {
+    function writeDoc($fileList, $dir, $appId, $authToken) {
         foreach($fileList->children as $currentParentItem) {
             if (!is_null($currentParentItem->children)) {
                 foreach ($currentParentItem->children as $currentChild) {
@@ -61,8 +61,6 @@
 
     function writeFile($dir, $path, $content) {
         $filePath = $dir."/".$path;    
-
-        echo $filePath."\n\n";
 
         if(!file_exists(dirname($filePath)))
             mkdir(dirname($filePath), 0777, true);
